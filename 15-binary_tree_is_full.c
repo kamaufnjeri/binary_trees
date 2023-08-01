@@ -18,6 +18,8 @@ int binary_tree_is_full_side(const binary_tree_t *tree)
 		right = binary_tree_is_full_side(tree->right);
 		if ((left == right) == 1)
 			return (1);
+		else
+			return (0);
 	}
 	return (0);
 }
@@ -39,6 +41,8 @@ int binary_tree_is_full(const binary_tree_t *tree)
 		right = binary_tree_is_full_side(tree->right);
 		if ((left == right) == 1)
 			return (1);
+		else
+			return (0);
 	}
 	return (0);
 }
