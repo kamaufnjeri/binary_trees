@@ -1,5 +1,40 @@
 #include "binary_trees.h"
 
+binary_tree_t *loop(binary_tree_t *one, binary_tree_t *two)
+{
+	binary_tree_t *node;
+
+	if (one->parent == NULL)
+	{
+		while (two->parent != NULL)
+		{
+			two = two->parent;
+			if (two == one)
+				return (two);
+		}
+	}
+	if (two->parent == NULL)
+	{
+		while (one->parent != NULL)
+		{
+			one = one->parent;
+			if (two == one)
+				return (one);
+		}
+	}
+	while (two->parent != NULL)
+        {
+                two = two->parent;
+                while (one->parent != NULL)
+                {
+                        node = binary_trees_ancestor(one, two);
+                        one = one->parent;
+                        if (node != NULL)
+                                return (node);
+                }
+        }
+	return (NULL);
+}
 /**
  * binary_trees_ancestor - find thte least common ancestor of two nodes
  * @first: to look
@@ -26,18 +61,6 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 	two = (binary_tree_t *)second;
 	one = (binary_tree_t *)first;
 
-	while (two->parent != NULL)
-	{
-		two = two->parent;
-		while (one->parent != NULL)
-		{
-			node = binary_trees_ancestor(one, two);
-			one = one->parent;
-			if (node != NULL)
-				return (node);
-			else
-				return (node);
-		}
-	}
-	return (NULL);
+	node = loop(two, one);
+	return (node);
 }
