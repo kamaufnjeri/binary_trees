@@ -2,19 +2,20 @@
 
 /**
  * binary_trees_ancestor - Finds the lowes
- * @first: Pointer
- * @second: Pointer
+ * @first: node to search ancestor
+ * @second: the node to search
  *
- * Return: Pointer
+ * Return: ancestor of nodes
  */
 binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 					const binary_tree_t *second)
 {
-	const binary_tree_t *f_anc, *s_anc;
+	const binary_tree_t *one, *two;
 
-	for (f_anc = first; f_anc; f_anc = f_anc->parent)
-		for (s_anc = second; s_anc; s_anc = s_anc->parent)
-			if (f_anc == s_anc)
-				return ((binary_tree_t *)f_anc);
+	for (one = first; one != NULL; one = one->parent)
+		for (two = second; two != NULL; two = two->parent)
+			if (two == one)
+				return ((binary_tree_t *)two);
 	return (NULL);
+
 }
