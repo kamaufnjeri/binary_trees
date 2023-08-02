@@ -1,8 +1,17 @@
 #include "binary_trees.h"
 
+/**
+ * loop - loop through the nodes
+ * @one: to loop
+ * @two: to loop
+ * Return: NULL or node
+ */
 binary_tree_t *loop(binary_tree_t *one, binary_tree_t *two)
 {
 	binary_tree_t *node;
+
+	if (one == NULL || two == NULL)
+		return (NULL);
 
 	if (one->parent == NULL)
 	{
@@ -23,16 +32,16 @@ binary_tree_t *loop(binary_tree_t *one, binary_tree_t *two)
 		}
 	}
 	while (two->parent != NULL)
-        {
-                two = two->parent;
-                while (one->parent != NULL)
-                {
-                        node = binary_trees_ancestor(one, two);
-                        one = one->parent;
-                        if (node != NULL)
-                                return (node);
-                }
-        }
+	{
+		two = two->parent;
+		while (one->parent != NULL)
+		{
+			node = binary_trees_ancestor(one, two);
+			one = one->parent;
+			if (node != NULL)
+				return (node);
+		}
+	}
 	return (NULL);
 }
 /**
